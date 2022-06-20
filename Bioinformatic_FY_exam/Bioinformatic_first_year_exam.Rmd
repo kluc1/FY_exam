@@ -1,0 +1,46 @@
+---
+title: "Bioinformatic_FY_exam"
+author: 'San Luc (PID: A59010657)'
+date: '2022-06-20'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+library(bio3d)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(lubridate)
+```
+
+```{r}
+#load csv file of COVID-19 Variant Data
+Variant <- read.csv("/Users/sanluc/Desktop/Lab Folder/MISC/First Year Exam/covid19_variants.csv")
+View(Variant)
+```
+
+```{r}
+#changing the format of the date column
+Variant$date <- ymd(Variant$date)
+str(Variant$date)
+```
+```{r}
+#excluding rows containing Total or Other variant
+
+new_variant <- filter(Variant, variant_name != "Other" & variant_name != "Total")
+```
+
+```{r}
+#graph the plot
+ggplot(new_variant) + 
+  geom_line(aes(x = date, y = percentage, colour = variant_name))+ 
+  scale_x_date(date_break = "1 month", date_labels = "%b %Y")+
+  theme(axis.text.x = element_text(angle = 45, size = 5)) + 
+  xlab("") + 
+  ylab("Percentage of sequenced specimens") +
+  ggtitle("Covid-19 Variants in California")
+```
+
+
