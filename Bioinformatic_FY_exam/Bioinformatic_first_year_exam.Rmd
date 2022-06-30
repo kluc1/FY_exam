@@ -40,6 +40,7 @@ ggplot(new_variant) +
   theme(axis.text.x = element_text(angle = 45, size = 5)) + 
   xlab("") + 
   ylab("Percentage of sequenced specimens") +
+  labs( colour = '') +
   ggtitle("Covid-19 Variants in California")
 ```
 
